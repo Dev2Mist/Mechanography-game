@@ -1,4 +1,9 @@
-#user-input{
+#user-input {
     width: 500px;
     height: 100px;
+}
+
+.wrong-text {
+    color: rgb(84, 9, 9);
+    background-color: rgba(241, 71, 71, 0.162);
 }
