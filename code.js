@@ -6,26 +6,30 @@ const texto = [
 
 const usuarioInput = document.querySelector("#user-input");
 const text = document.querySelector("#text");
-let currentIndex = -1;
 
 let textoSeleccionado = (text.textContent = textSelection(texto));
 
 usuarioInput.addEventListener("input", (e) => {
   console.clear();
-  console.log("Current index: " + currentIndex);
-  let followingIndex = currentIndex;
+  let currentIndex = usuarioInput.value.length - 1,
+    compare = compareInputText(usuarioInput, text, currentIndex);
 
-  if (e.inputType == "deleteContentBackward" && currentIndex >= 0)
-    currentIndex--;
-  else currentIndex++;
+  console.log(
+    "Comparacion: ",
+    usuarioInput.value[currentIndex] == text.textContent[currentIndex]
+  );
 
-  if (usuarioInput.value[currentIndex] != text.textContent[currentIndex]) {
-    followingIndex = currentIndex;
-    console.log(`Indice en el que se cometió un error ${followingIndex}`);
-  }
+  console.log(
+    "Indice actual:",
+    currentIndex,
+    "  Valor:",
+    usuarioInput.value[currentIndex]
+  );
+
   console.log(
     `Input del usuario: ${usuarioInput.value[currentIndex]}\nTexto en el indice actual: ${text.textContent[currentIndex]}`
   );
+
   console.log(
     "Resultado de la comparacion: ",
     usuarioInput.value[currentIndex] == text.textContent[currentIndex]
@@ -36,6 +40,10 @@ function textSelection(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+function compareInputText(inputElement, comparingText, index) {
+  return inputElement.value[index] == comparingText.textContent[index];
+}
+
 // TODO -> 1. Cuando el usuario comete un error, se puede indicar el indice en el cuál se cometió el  error, para corregirlo, el usuario debe borrar hasta dicho indice y escribir la letra que corresponda.
-// TODO -> 2. Hacer que el color del texto se modifique cuando
+// TODO -> 2. Hacer que el color del texto se modifique cuando el usuario se equivoca.
 // TODO -> 3. Al borrar con "Ctrl + Delete" ocurre un problema ya que el indice se modifica en 1. Las solución quizá es utilizar alguna funcion que mapee correctamente el indice del string en el cual se encuentra el usuario.
